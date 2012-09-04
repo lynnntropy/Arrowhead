@@ -14,9 +14,25 @@ int main()
 	int game_loop;
 	game_loop = 1;
 	
+	int projectile;
+	int projectile_direction;
+	int projectile_ttl;
+	int projectile_x; 
+	int projectile_y;
+	projectile = 0;
+	projectile_direction = 0;
+	
+	int base_x;
+	int base_y;
+	
+	
 	int x;
 	int y;
 	int direction;
+	
+	int maxx;
+	int maxy;
+	getmaxyx(stdscr, maxy, maxx);
 	
 	x = 0;
 	y = 0;
@@ -45,6 +61,9 @@ int main()
 			case 2:
 				y++;
 				drawPlayer(x, y, 'V');
+				break;
+			case 7:
+				projectile = 1;
 				break;
 			case 5:
 				break;
@@ -113,7 +132,39 @@ int getInput()
 		case 'd':
 			return 6;
 			break;
+		case 'l':
+			return 7;
+			break;
 	}
 	
 		
+}
+
+int randomLocationX(int maxx)
+{
+	int x;
+	srand((unsigned)time(NULL));
+	x = rand();
+	x = x % maxx;
+	return x;	
+}
+
+int randomLocationY(int maxy)
+{
+	int y;
+	srand((unsigned)time(NULL));
+	y = rand();
+	y = y % maxy;
+	return y;
+}
+
+void drawBase(int x, int y)
+{
+	int maxx;
+	int maxy;
+	
+	getmaxyx(stdscr, maxy, maxx);
+	
+		erase();
+		mvprintw(y, x, '#');
 }
